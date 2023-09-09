@@ -1,11 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import UserForm from './Features/Form/UserForm';
+import { store } from './store';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-     <h1>This is react app</h1>
-    </div>
+    <Provider store={store}>
+      <UserForm />
+    </Provider>
   );
-}
+};
 
 export default App;

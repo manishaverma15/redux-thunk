@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { User } from './UserSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, User } from './UserSlice';
 import { v4 as uuidv4 } from 'uuid';
 import './Form.css';
+import UserTable from './UserTable';
 
 interface FormProps {
   user?: User;
 }
 
 const UserForm: React.FC<FormProps> = ({ user }) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useDispatch();
+  const users = useSelector((state: any) => state.users);
 
   const [formData, setFormData] = useState<User>({
     id: uuidv4(),
@@ -26,7 +29,7 @@ const UserForm: React.FC<FormProps> = ({ user }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('form-data',formData)
+      dispatch(addUser(formData));
 
     setFormData({
       id: uuidv4(),
@@ -72,9 +75,10 @@ const UserForm: React.FC<FormProps> = ({ user }) => {
           />
         </label>
         <br />
-        <button type='submit'>{isEditing ? 'Update User' : 'Add User'}</button>
+        <button type='submit'>{'Add User'}</button>
       </form>
 
+      <UserTable />
     </>
   )
 }
