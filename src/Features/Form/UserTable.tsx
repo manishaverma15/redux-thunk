@@ -17,6 +17,8 @@ const UserTable = (props: any) => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -25,6 +27,8 @@ const UserTable = (props: any) => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.phoneNumber}</td>
+                  <td><button onClick={() => props.handleEdit(user.id)}>Edit</button></td>
+                  <td><button onClick={() => props.handleDelete(user.id)}>Delete</button></td>
                 </tr>
               ))}
             </tbody>
