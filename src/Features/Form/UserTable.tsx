@@ -1,14 +1,32 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { User } from './UserSlice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { User, getUsers } from './UserSlice';
+import { AppDispatch } from '../../store';
 
 const UserTable = (props: any) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { data, loading, error } = useSelector((state: any) => state.users);
 
-  const users = useSelector((state: any) => state.users);
+  useEffect(() => {
+    dispatch(getUsers())
+  }, []);
 
   return (
     <>
-      {users.length > 0 ? (
+      {
+        loading &&
+        <div>
+          <h1>Loading....</h1>
+        </div>
+      }
+
+      {
+        error && <div>
+          <h2>{error}</h2>
+        </div>
+      }
+
+      {data && data.length > 0 ? (
         <div>
           <h2>Submitted Users</h2>
           <table className='user-table'>
@@ -22,7 +40,7 @@ const UserTable = (props: any) => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user: User) => (
+              {data.map((user: User) => (
                 <tr key={user.id}>
                   <td>{user.name}</td>
                   <td>{user.email}</td>

@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, updateUser, deleteUser, User } from './UserSlice';
+import { updateUser, deleteUser, User, getUsers, postUser } from './UserSlice';
 import { v4 as uuidv4 } from 'uuid';
 import './Form.css';
 import UserTable from './UserTable';
+import { AppDispatch } from '../../store';
 
 interface FormProps {
   user?: User;
 }
 
 const UserForm: React.FC<FormProps> = ({ user }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: any) => state.users);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -20,6 +21,10 @@ const UserForm: React.FC<FormProps> = ({ user }) => {
     email: user?.email || '',
     phoneNumber: user?.phoneNumber || '',
   })
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -32,10 +37,10 @@ const UserForm: React.FC<FormProps> = ({ user }) => {
     e.preventDefault();
 
     if (isEditing) {
-      dispatch(updateUser(formData));
+      dispatch(updateUser(user));
     }
     else {
-      dispatch(addUser(formData));
+      dispatch(postUser(formData));
     }
 
     setIsEditing(false)
