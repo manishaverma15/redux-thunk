@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '../Features/Form/UserSlice';
+import userReducer from '../features/Form/userSlice';
 import thunk from 'redux-thunk';
 
 export const store = configureStore({
