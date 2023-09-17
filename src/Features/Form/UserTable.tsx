@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { User, getUsers } from './UserSlice';
 import { AppDispatch } from '../../store';
+import { User } from '../../services/users';
+import { getUsers } from './userSlice';
 
 const UserTable = (props: any) => {
   const dispatch = useDispatch<AppDispatch>();

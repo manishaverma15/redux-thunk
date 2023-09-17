@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser, deleteUser, User, getUsers, postUser } from './UserSlice';
 import { v4 as uuidv4 } from 'uuid';
 import './Form.css';
-import UserTable from './UserTable';
 import { AppDispatch } from '../../store';
+import { User } from '../../services/users';
+import { updateUser, deleteUser, getUsers, postUser } from './userSlice';
+import UserTable from './UserTable';
 
-interface FormProps {
-  user?: User;
-}
-
-const UserForm: React.FC<FormProps> = ({ user }) => {
+const UserForm: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const users = useSelector((state: any) => state.users);
+  const users = useSelector((state: any) => state.users.data);
   const [isEditing, setIsEditing] = useState(false);
 
   const [formData, setFormData] = useState<User>({
     id: uuidv4(),
-    name: user?.name || '',
-    email: user?.email || '',
-    phoneNumber: user?.phoneNumber || '',
+    name: '',
+    email: '',
+    phoneNumber: '',
   })
 
   useEffect(() => {
@@ -37,7 +34,7 @@ const UserForm: React.FC<FormProps> = ({ user }) => {
     e.preventDefault();
 
     if (isEditing) {
-      dispatch(updateUser(user));
+      dispatch(updateUser(formData));
     }
     else {
       dispatch(postUser(formData));
@@ -58,12 +55,14 @@ const UserForm: React.FC<FormProps> = ({ user }) => {
   }
 
   const handleEdit = (id: any) => {
-    const selectedUser = users.find((user: User) => user.id === id)
-    console.log('selected-user', selectedUser)
-    if (selectedUser) {
-      setFormData(selectedUser)
+    if (users) {
+      const selectedUser = users.find((user: User) => user.id === id)
+      console.log('selected-user', selectedUser)
+      if (selectedUser) {
+        setFormData(selectedUser)
+      }
+      setIsEditing(true);
     }
-    setIsEditing(true);
   }
 
   return (

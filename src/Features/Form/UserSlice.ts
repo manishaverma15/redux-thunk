@@ -1,15 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { AppDispatch } from '../../store';
+import { User, getUsers as getUsersAPI, postUser as postUserAPI } from '../../services/users';
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  phoneNumber: string;
-}
-
-interface State {
+type State = {
   data: User[];
   loading: boolean;
   error: any
@@ -24,13 +18,7 @@ const initialUserState: State = {
 export const getUsers = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(fetchStart())
-    const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-
-    const users = response.data.map((user: any) => ({
-      name: user.name,
-      email: user.email,
-      phoneNumber: user.phone
-    }));
+    const users = await getUsersAPI();
 
     dispatch(fetchSuccess(users))
 
@@ -40,9 +28,13 @@ export const getUsers = () => async (dispatch: AppDispatch) => {
 }
 
 export const postUser = (postData: any) => async (dispatch: AppDispatch) => {
-  const response = await axios.post('https://jsonplaceholder.typicode.com/posts', postData)
-  console.log('response', response.data)
-  dispatch(addUser(postData))
+  try {
+    const users = await postUserAPI(postData);
+    dispatch(addUser(users))
+
+  } catch (error: any) {
+    console.log(error)
+  }
 }
 
 const userSlice = createSlice({
