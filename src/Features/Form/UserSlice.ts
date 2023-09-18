@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { AppDispatch } from '../../store';
 import { User, getUsers as getUsersAPI, postUser as postUserAPI } from '../../services/users';
 
@@ -19,7 +18,7 @@ export const getUsers = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(fetchStart())
     const users = await getUsersAPI();
-
+    
     dispatch(fetchSuccess(users))
 
   } catch (error: any) {
