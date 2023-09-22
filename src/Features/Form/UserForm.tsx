@@ -71,19 +71,21 @@ const UserForm: React.FC = () => {
         <h1 style={{ textAlign: 'center' }}>React-Redux Form</h1>
       </div>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
+        <label htmlFor="name">Name:
           <input
+            data-testid='name-input'
             type='text'
             name='name'
+            placeholder='Name'
             value={formData.name}
             onChange={handleChange}
           />
         </label>
         <br />
-        <label>
+        <label htmlFor="name">
           Email:
           <input
+            data-testid='email-input'
             type='email'
             name='email'
             value={formData.email}
@@ -91,9 +93,10 @@ const UserForm: React.FC = () => {
           />
         </label>
         <br />
-        <label>
+        <label htmlFor="name">
           Phone Number:
           <input
+            data-testid='phone-input'
             type='number'
             name='phoneNumber'
             value={formData.phoneNumber}
@@ -101,7 +104,7 @@ const UserForm: React.FC = () => {
           />
         </label>
         <br />
-        <button type='submit'>{isEditing ? 'Update User' : 'Add User'}</button>
+        <button type='submit' data-testid='submit-button'>{isEditing ? 'Update User' : 'Add User'}</button>
       </form>
 
       <UserTable handleEdit={handleEdit} handleDelete={handleDelete} />

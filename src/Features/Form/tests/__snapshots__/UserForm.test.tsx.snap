@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Component render correctly when there are users 1`] = `
+<DocumentFragment>
+  <div>
+    <h1
+      style="text-align: center;"
+    >
+      React-Redux Form
+    </h1>
+  </div>
+  <form>
+    <label
+      for="name"
+    >
+      Name:
+      <input
+        data-testid="name-input"
+        name="name"
+        placeholder="Name"
+        type="text"
+        value=""
+      />
+    </label>
+    <br />
+    <label
+      for="name"
+    >
+      Email: Email:
+      <input
+        data-testid="email-input"
+        name="email"
+        type="email"
+        value=""
+      />
+    </label>
+    <br />
+    <label
+      for="name"
+    >
+      Phone Number: Phone Number:
+      <input
+        data-testid="phone-input"
+        name="phoneNumber"
+        type="number"
+        value=""
+      />
+    </label>
+    <br />
+    <button
+      data-testid="submit-button"
+      type="submit"
+    >
+      Add User
+    </button>
+  </form>
+  <div
+    class="user-table"
+  >
+    <h2>
+      Submitted Users
+    </h2>
+    <table
+      data-testid="user-table"
+    >
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Phone Number
+          </th>
+          <th>
+            Edit
+          </th>
+          <th>
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            John Roy
+          </td>
+          <td>
+            john@gmail.com
+          </td>
+          <td>
+            1234567890
+          </td>
+          <td
+            data-testid="edit-button"
+          >
+            <button>
+              Edit
+            </button>
+          </td>
+          <td
+            data-testid="delete-button"
+          >
+            <button>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Form Component render correctly when there no users 1`] = `
+<DocumentFragment>
+  <div>
+    <h1
+      style="text-align: center;"
+    >
+      React-Redux Form
+    </h1>
+  </div>
+  <form>
+    <label
+      for="name"
+    >
+      Name:
+      <input
+        data-testid="name-input"
+        name="name"
+        placeholder="Name"
+        type="text"
+        value=""
+      />
+    </label>
+    <br />
+    <label
+      for="name"
+    >
+      Email: Email:
+      <input
+        data-testid="email-input"
+        name="email"
+        type="email"
+        value=""
+      />
+    </label>
+    <br />
+    <label
+      for="name"
+    >
+      Phone Number: Phone Number:
+      <input
+        data-testid="phone-input"
+        name="phoneNumber"
+        type="number"
+        value=""
+      />
+    </label>
+    <br />
+    <button
+      data-testid="submit-button"
+      type="submit"
+    >
+      Add User
+    </button>
+  </form>
+  <div
+    class="user-table"
+  >
+    <h2>
+      Submitted Users
+    </h2>
+    <table
+      data-testid="user-table"
+    >
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Phone Number
+          </th>
+          <th>
+            Edit
+          </th>
+          <th>
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tbody />
+    </table>
+  </div>
+</DocumentFragment>
+`;

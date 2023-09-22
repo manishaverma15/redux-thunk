@@ -27,10 +27,10 @@ const UserTable = (props: any) => {
         </div>
       }
 
-      {data && data.length > 0 ? (
-        <div>
+      {data && (
+        <div className='user-table'>
           <h2>Submitted Users</h2>
-          <table className='user-table'>
+          <table data-testid='user-table'>
             <thead>
               <tr>
                 <th>Name</th>
@@ -46,15 +46,14 @@ const UserTable = (props: any) => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.phoneNumber}</td>
-                  <td><button onClick={() => props.handleEdit(user.id)}>Edit</button></td>
-                  <td><button onClick={() => props.handleDelete(user.id)}>Delete</button></td>
+                  <td data-testid='edit-button'><button onClick={() => props.handleEdit(user.id)}>Edit</button></td>
+                  <td data-testid='delete-button'><button onClick={() => props.handleDelete(user.id)}>Delete</button></td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      )
-        : ''}
+      )}
     </>
   )
 }
