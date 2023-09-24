@@ -97,7 +97,6 @@ const UserForm: React.FC = () => {
           Phone Number:
           <input
             data-testid='phone-input'
-            type='number'
             name='phoneNumber'
             value={formData.phoneNumber}
             onChange={handleChange}

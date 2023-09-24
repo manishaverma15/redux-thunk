@@ -44,7 +44,7 @@ describe('Form Component', () => {
 
     await waitFor(() => screen.getByTestId('user-table'));
 
-    fireEvent.change(screen.getByTestId("name-input"), { target: { value: mockUser.name } });
+    fireEvent.change(screen.getByTestId('name-input'), { target: { value: mockUser.name } });
     fireEvent.change(screen.getByTestId('email-input'), { target: { value: mockUser.email } });
     fireEvent.change(screen.getByTestId('phone-input'), { target: { value: mockUser.phoneNumber } });
 
@@ -56,8 +56,47 @@ describe('Form Component', () => {
       expect(screen.getByText('9876543210')).toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByTestId('delete-button'));
-    expect(screen.queryByText('user')).not.toBeInTheDocument();
+    await waitFor(() => screen.getByTestId('user-table'));
+
+    fireEvent.click(screen.getByTestId(`delete-button-${mockUser.id}`));
+    await waitFor(() => {
+      expect(screen.queryByText('user')).not.toBeInTheDocument();
+    });
   });
+
+  it('render when user is edited', async () => {
+    const mockUser = { id: 'test', name: 'John Roy', email: 'john@gmail.com', phoneNumber: '1234567890' }
+    getUsers.mockReturnValue(users);
+
+    render(<UserForm />);
+
+    await waitFor(() => screen.getByTestId('user-table'));
+
+    fireEvent.click(screen.getByTestId(`edit-button-${mockUser.id}`));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('name-input')).toHaveValue(mockUser.name);
+      expect(screen.getByTestId('email-input')).toHaveValue(mockUser.email);
+      expect(screen.getByTestId('phone-input')).toHaveValue(mockUser.phoneNumber);
+    });
+
+    fireEvent.change(screen.getByTestId('name-input'), { target: { value: 'roy' } });
+    fireEvent.change(screen.getByTestId('email-input'), { target: { value: 'roy123@gmail.com' } });
+    fireEvent.change(screen.getByTestId('phone-input'), { target: { value: '9876543210' } });
+
+    fireEvent.submit(screen.getByTestId('submit-button'));
+
+    fireEvent.change(screen.getByTestId('name-input'), { target: { value: mockUser.name } });
+    fireEvent.change(screen.getByTestId('email-input'), { target: { value: mockUser.email } });
+    fireEvent.change(screen.getByTestId('phone-input'), { target: { value: mockUser.phoneNumber } });
+
+    await waitFor(() => {
+      expect(screen.getByText('roy')).toBeInTheDocument();
+      expect(screen.getByText('roy123@gmail.com')).toBeInTheDocument();
+      expect(screen.getByText('9876543210')).toBeInTheDocument();
+    });
+
+    await waitFor(() => screen.getByTestId('user-table'));
+  })
 
 });

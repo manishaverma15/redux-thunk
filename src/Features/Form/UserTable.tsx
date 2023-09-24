@@ -46,8 +46,10 @@ const UserTable = (props: any) => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.phoneNumber}</td>
-                  <td data-testid='edit-button'><button onClick={() => props.handleEdit(user.id)}>Edit</button></td>
-                  <td data-testid='delete-button'><button onClick={() => props.handleDelete(user.id)}>Delete</button></td>
+                  <td><button onClick={() => props.handleEdit(user.id)}
+                    data-testid={`edit-button-${user.id}`}>Edit</button></td>
+                  <td><button onClick={() => props.handleDelete(user.id)}
+                    data-testid={`delete-button-${user.id}`}>Delete</button></td>
                 </tr>
               ))}
             </tbody>
