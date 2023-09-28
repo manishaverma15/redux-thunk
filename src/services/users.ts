@@ -13,7 +13,7 @@ export async function getUsers(): Promise<User[]> {
   try {
     const response = await fetch(BASE_URL);
     if (!response.ok) {
-      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      throw new Error('Something went wrong! Please check console for errors');
     }
 
     const data = await response.json();
@@ -40,7 +40,7 @@ export async function postUser(postData: any): Promise<User> {
     });
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      throw new Error('Something went wrong! Please check console for errors');
     }
 
     const data = await response.json();
